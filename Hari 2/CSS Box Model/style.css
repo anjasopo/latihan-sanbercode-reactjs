@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+.box{
+    border: 1px solid red;
+    padding: 50px;
+    position: relative;
+}
+
+.inner_box{
+    position: absolute;
+    border: 1px solid blue;
+    top: 0;
+}
+
+.box2{
+    position: fixed;
+    border: 500px;
+    top: 0px;
+}
+
+p{
+    display: block;
+    border: 1px solid red;
+}
+
+.text2{
+    display: inline;
+    border: 1px solid red;
+}
+
+.text3{
+    display: inline-block;
+    border: 1px solid red;
+}

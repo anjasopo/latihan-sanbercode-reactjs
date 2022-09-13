@@ -1,0 +1,15 @@
+p {
+    color: red;
+}
+
+.text-2 {
+    color: yellow;
+}
+
+#text {
+    font-size: 20px;
+}
+
+.section-1 {
+    border: double;
+}
