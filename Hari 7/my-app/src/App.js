@@ -1,12 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { useState } from "react";
 
-function App() {
+const App = () => {
+
+  const [name, setName] = useState( "Anjas" )
+  const [gender, setGender] = useState("Laki-laki")
+
+  const handleChangeName = () => {
+    setGender(gender === "Laki-laki" ? "Perempuan" : "Laki-laki")
+  }
+
   return (
-    <div className="App" style={{ color:"blue" }}>
-      <h1>Hello World</h1>
+    <div className="card">
+
+      { gender === "Laki-laki" ? <span>Pak</span> : <span>Buk</span> }
+
+      <span> { name } </span>
+
+
+      <button onClick={handleChangeName}> ganti nama </button>
     </div>
-  );
+  )
 }
 
 export default App;
