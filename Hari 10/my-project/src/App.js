@@ -13,6 +13,9 @@ const App = () => {
 
   const [fecthStatus, setFecthStatus] = useState(true);
 
+  //indikator
+  const [currentId, setCurrentId] = useState(-1);
+
   useEffect(() => {
     if (fecthStatus === true) {
       axios
@@ -43,11 +46,58 @@ const App = () => {
   const handleSumbit = (event) => {
     event.preventDefault();
     let { name } = input;
+
+    if (currentId === -1) {
+      axios
+        .post("https://backendexample.sanbercloud.com/api/contestants", {
+          name,
+        })
+        .then((res) => {
+          console.log(res);
+          setFecthStatus(true);
+        });
+    } else {
+      axios
+        .put(
+          `https://backendexample.sanbercloud.com/api/contestants/${currentId}`,
+          { name }
+        )
+        .then((res) => {
+          setFecthStatus(true);
+        });
+    }
+
+    setCurrentId(-1);
+
+    setInput({
+      name: "",
+    });
+  };
+
+  const handleDelete = (event) => {
+    let idData = parseInt(event.target.value);
+
     axios
-      .post("https://backendexample.sanbercloud.com/api/contestants", { name })
+      .delete(
+        `https://backendexample.sanbercloud.com/api/contestants/${idData}`
+      )
       .then((res) => {
-        console.log(res);
         setFecthStatus(true);
+      });
+  };
+
+  const handleEdit = (event) => {
+    let idData = parseInt(event.target.value);
+    setCurrentId(idData);
+
+    axios
+      .get(`https://backendexample.sanbercloud.com/api/contestants/${idData}`)
+      .then((res) => {
+        let data = res.data;
+
+        setInput({
+          name: data.name,
+        });
       });
   };
 
@@ -59,7 +109,15 @@ const App = () => {
             data.map((res) => {
               return (
                 <>
-                  <li> {res.name} </li>
+                  <li>
+                    {res.name} | &nbsp;
+                    <button onClick={handleEdit} value={res.id}>
+                      Edit
+                    </button>
+                    <button onClick={handleDelete} value={res.id}>
+                      Delete
+                    </button>
+                  </li>
                 </>
               );
             })}
