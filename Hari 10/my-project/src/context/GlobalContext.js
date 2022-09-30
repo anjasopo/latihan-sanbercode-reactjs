@@ -1,9 +1,12 @@
 import { createContext, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = (props) => {
+  let navigate = useNavigate();
+
   const [data, setData] = useState(null);
 
   //CRUD DATA
@@ -41,6 +44,7 @@ export const GlobalProvider = (props) => {
         .then((res) => {
           console.log(res);
           setFecthStatus(true);
+          navigate("/code-materi");
         });
     } else {
       axios
@@ -50,6 +54,7 @@ export const GlobalProvider = (props) => {
         )
         .then((res) => {
           setFecthStatus(true);
+          navigate("/code-materi");
         });
     }
 
@@ -75,16 +80,7 @@ export const GlobalProvider = (props) => {
   const handleEdit = (event) => {
     let idData = parseInt(event.target.value);
     setCurrentId(idData);
-
-    axios
-      .get(`https://backendexample.sanbercloud.com/api/contestants/${idData}`)
-      .then((res) => {
-        let data = res.data;
-
-        setInput({
-          name: data.name,
-        });
-      });
+    navigate(`/edit/${idData}`);
   };
 
   let fetchData = () => {

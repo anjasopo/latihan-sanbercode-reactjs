@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import { GlobalContext } from "../context/GlobalContext";
 
 const CodeMateri = () => {
@@ -50,14 +49,6 @@ const CodeMateri = () => {
             })}
         </ul>
       </div>
-
-      <p>FORM DATA</p>
-
-      <form onSubmit={handleSumbit}>
-        <span>Nama :</span>
-        <input onChange={handleInput} value={input.name} name="name" />
-        <input type={"submit"} />
-      </form>
     </>
   );
 };
